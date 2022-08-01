@@ -1,54 +1,42 @@
-const fs = require('fs')
 const express = require('express');
+const morgan = require('morgan');
+
+const tourRouter = require('./routes/tourRoutes');
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
 // Middleware between client req and server
-app.use(express.json());
-
-// app.get('/', (req, res) => {
-//   res.json({ message: 'Hello from the server side!', app: 'Tours'});
-// });
-
-// app.post('/', (req, res) => {
-//   res.send('You can post to this endpoint...');
-// });
-
-const tours = JSON.parse(
-  fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
-)
-
-app.get('/api/v1/tours', (req, res) => {
-  res.json({
-    status: 'success',
-    results: tours.length,
-    data: {
-      tours
-    }
-  })
-})
-
-app.post('/api/v1/tours', (req, res) => {
-  // console.log(req.body);
-
-const newId = tours[tours.length - 1].id + 1;
-const newTour = Object.assign({ id: newId }, req.body)
-
-tours.push(newTour);
-
-fs.writeFile( `${__dirname}/dev-data/data/tours-simple.json`,JSON.stringify(tours), err => {
-  res.json({
-    status: 'success',
-    data: {
-      tour: newTour
-    }
-  })
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
 }
 
-)
-})
+app.use(express.json());
+// Access static website
+app.use(express.static(`${__dirname}/public`));
 
-const port = 3001;
-app.listen(port, () => {
-  console.log(`App running on port ${port}...`)
+app.use((req, res, next) => {
+  console.log('Hello from the middleware');
+  next();
 });
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
+// Routes
+app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/users', userRouter);
+
+module.exports = app;
+
+// route handlers
+// Users
+// app.get('/api/v1/tours', getAllTours)
+// app.get('/api/v1/tours/:id', getTour);
+// app.post('/api/v1/tours', createTour);
+// app.patch('/api/v1/tours/:id', updateTour);
+// app.delete('/api/v1/tours/:id', deleteTour);
+// routes
