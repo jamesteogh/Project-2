@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 //User Handlers
 
 exports.getAllUsers = (req, res) => {

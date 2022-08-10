@@ -1,10 +1,18 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
+const viewRouter = require('./routes/viewRoutes');
+
 
 const app = express();
+
+app.set('view engine', 'pug')
+app.set('views', path.join(__dirname, 'views'))
+// Access static website
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware between client req and server
 console.log(process.env.NODE_ENV);
@@ -13,8 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.json());
-// Access static website
-app.use(express.static(`${__dirname}/public`));
+
 
 app.use((req, res, next) => {
   console.log('Hello from the middleware');
@@ -27,6 +34,8 @@ app.use((req, res, next) => {
 });
 
 // Routes
+
+app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 

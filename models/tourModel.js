@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+
+
 const tourSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -16,11 +18,19 @@ const tourSchema = new mongoose.Schema({
   },
   difficulty: {
     type: String,
-    required: [true, 'A tour must have a difficulty']
+    required: [true, 'A tour must have a difficulty'],
+    enum: {
+      values: ['easy', 'medium', 'difficult'],
+      message: 'Difficulty is either: easy, medium or difficult'
+    }
   },
   ratingsAverage: {
     type: Number,
     default: 4.5
+  },
+  ratingsQuantity: {
+    type: Number,
+    default: 0
   },
   ratingsQuantity: {
     type: Number,
@@ -45,11 +55,14 @@ const tourSchema = new mongoose.Schema({
     required: [true, 'A tour must have a cover image']
   },
   images: [String],
-  createAt: {
+  createdAt: {
     type: Date,
-    default: Date.now()
+    default: Date.now(),
+    select: false
   },
-  startDates: [Date]
+  startDates: [Date],
+  startLocation: {},
+  locations: []
 });
 const Tour = mongoose.model('Tour', tourSchema);
 

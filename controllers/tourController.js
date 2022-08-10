@@ -1,35 +1,23 @@
-//Tour Handlers
-
 const Tour = require('./../models/tourModel');
+const APIFeatures = require('./../utils/apiFeatures');
 
+exports.aliasTopTours = (req, res, next) => {
+  req.query.limit = '5';
+  req.query.sort = '-ratingsAverage,price';
+  req.query.fields = 'name , price , ratingsAverage , summary, difficulty';
+  next();
+};
 // const tours = JSON.parse(
 //   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
 // );
 
 exports.getAllTours = async (req, res) => {
   try {
-    console.log(req.query);
-    // BUILD QUERY
-    // 1A) Filtering
-    const queryObj = { ...req.query };
-    const excludedFields = ['page','sort','limit','fields'];
-    excludedFields.forEach(el => delete queryObj[el]);
-
-    // console.log(req.query, queryObj); --> { sort: '5', difficulty: 'easy', limit: '2' } { difficulty: 'easy' }
-    // console.log(req.query); --> { duration: '5', difficulty: 'easy' }
-    // 1B) Advanced filtering
-    let queryStr = JSON.stringify(queryObj);
-    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
-    console.log(JSON.parse(queryStr));
-
-    const query = Tour.find(JSON.parse(queryStr));
-    // {diffculty: 'easy', duration: { $gte: 5}}
-    // { difficulty: 'easy', duration: { gte: '5' } }
-    // 2) Sorting
-    
-
     // EXECUTE QUERY
-    const tours = await query;
+    const features = new APIFeatures(Tour.find(), req.query).filter().sort().limitFields().paginate();
+    const tours = await features.query;
+    // query.sort().select().skip().limit()
+
     // SEND RESPONSE
     res.json({
       status: 'success',
@@ -122,3 +110,14 @@ exports.deleteTour = async (req, res) => {
     })
   }
 }
+
+// exports.getTourStats = async (req, res) => {
+//   try {
+//     const stats = 
+//   } catch(err) {
+//     res.status(400).json({
+//       status: 'fail',
+//       message: err
+//     })
+//   }
+// }
