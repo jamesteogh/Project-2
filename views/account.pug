@@ -7,7 +7,6 @@ mixin navItem(link, text, icon, active)
         use(xlink:href=`img/icons.svg#icon-${icon}`)
       | #{text}
 
-
 block content
   main.main
     .user-view
@@ -18,14 +17,14 @@ block content
           +navItem('#', 'My reviews', 'star')
           +navItem('#', 'Billing', 'credit-card')
 
-        - if(user.role === 'admin')
+        //- - if(user.role === 'admin')
         .admin-nav
           h5.admin-nav__heading Admin
           ul.side-nav
             +navItem('#', 'Manage tours', 'map')
             +navItem('#', 'Manage users', 'users')
             +navItem('#', 'Manage reviews', 'star')
-            +navItem('#', 'Managee bookings', 'briefcase')
+            +navItem('#', 'Manage bookings', 'briefcase')
             
       .user-view__content
         .user-view__form-container
@@ -33,12 +32,15 @@ block content
           form.form.form-user-data
             .form__group
               label.form__label(for='name') Name
-              input#name.form__input(type='text', value=`${user.name}`, required)
+              input#name.form__input(type='text', value='James Teo', required)
+              //- `${user.name}`
             .form__group.ma-bt-md
               label.form__label(for='email') Email address
-              input#email.form__input(type='email', value=`${user.email}`, required)
+              input#email.form__input(type='email', value='jamesteo@gmail.com', required)
+              //- `${user.email}`
             .form__group.form__photo-upload
-              img.form__user-photo(src=`img/users/${user.name}`, alt='User photo')
+              img.form__user-photo(src= "img/users/user-1", alt='User photo')
+              //- `img/users/${user.name}`
               a.btn-text(href='') Choose new photo
             .form__group.right
               button.btn.btn--small.btn--green Save settings
