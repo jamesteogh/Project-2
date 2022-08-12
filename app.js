@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -21,15 +22,11 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.json());
-
-
-app.use((req, res, next) => {
-  console.log('Hello from the middleware');
-  next();
-});
+app.use(cookieParser());
 
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
+  console.log(req.cookies);
   next();
 });
 
