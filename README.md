@@ -5,19 +5,18 @@
   - Manage booking, check users' reviews and rating
 * User profile
   - Update username, photo, email, and password
-## Book a tour
+## Book a Tour
 * Login to the site
 * Search for tours that you want to book
 * Book a tour
-## Manage your booking
+## Manage Your Booking
 
 * Check the tour you have booked in "Manage Booking" page in your user settings. You'll be automatically redirected to this
   page after you have completed the booking.
 
-## Update your profile
+## Update Your Profile
 * You can update your own username, profile photo, email and password.
-## GIT 
---------------------
+## Git
 
 To download this Tour booking files, you can paste this command into your command line or terminal
 
@@ -38,7 +37,7 @@ or you can use paste this github links pages into your browser
 * [Postman](https://www.getpostman.com/) - API testing
 * [Heroku](https://www.heroku.com/) - Cloud platform
 
-## To do
+## To Do
 
 * Review and rating
   - Allow user to add a review directly at the website after they have taken a tour
@@ -47,12 +46,12 @@ or you can use paste this github links pages into your browser
 * Advanced authentication features
   - Signup, confirm user email, login with refresh token, two-factor authentication
   
-## CHALLENGES FACED
-------------------
+## Challenges Faced
+
 
 1. 
 
-## THINGS TO IMPROVE ON IF I HAD MORE TIME
+## Things To Improve On If I Have More Time
 ----------------------
 
 1. UI and UX improvement to make the website more user friendly
