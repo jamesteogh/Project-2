@@ -1,14 +1,13 @@
 ## Key Features
-* Authentication and Authorization
-  - Login and logout
-* Tour
-  - Manage booking, check users' reviews and rating
-* User profile
-  - Update username, photo, email, and password
+* Render out all tours in a single page
+* View details of a particular tour
+
 ## Book a Tour
 * Login to the site
 * Search for tours that you want to book
 * Book a tour
+* Manage booking, check users' reviews and rating
+* Update username, email, and password
 ## Manage Your Booking
 
 * Check the tour you have booked in "Manage Booking" page in your user settings. You'll be automatically redirected to this
@@ -37,22 +36,20 @@ or you can use paste this github links pages into your browser
 * [Postman](https://www.getpostman.com/) - API testing
 * [Heroku](https://www.heroku.com/) - Cloud platform
 
-## To Do
-
+## Things To Improve On If I Have More Time
+----------------------
+* Incorporation of map
 * Review and rating
   - Allow user to add a review directly at the website after they have taken a tour
 * Booking
   - Prevent duplicate bookings after user has booked that exact tour, implement favourite tours
 * Advanced authentication features
   - Signup, confirm user email, login with refresh token, two-factor authentication
-  
 ## Challenges Faced
 
-
-1. 
-
-## Things To Improve On If I Have More Time
-----------------------
-
-1. UI and UX improvement to make the website more user friendly
-2. Incorporation of map
+* Authentication and Authorization
+  - Login and logout
+* Tour
+  - Manage booking, check users' reviews and rating
+* User profile
+  - Update username, email, and password
